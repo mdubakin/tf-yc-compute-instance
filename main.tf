@@ -2,11 +2,11 @@ locals {
   cloud_init_file = "configs/users.yaml"
 }
 
-data "yandex_compute_image" "os" {
+data "yandex_compute_image" "this" {
   family = var.os_family
 }
 
-resource "yandex_compute_instance" "vm-1" {
+resource "yandex_compute_instance" "this" {
   name        = var.name
   platform_id = var.platform_id
   zone        = var.zone
@@ -22,7 +22,7 @@ resource "yandex_compute_instance" "vm-1" {
 
   boot_disk {
     initialize_params {
-      image_id = data.yandex_compute_image.os.image_id
+      image_id = data.yandex_compute_image.this.image_id
       size     = var.boot_disk_size
     }
   }
