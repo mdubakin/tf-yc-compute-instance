@@ -1,5 +1,5 @@
 locals {
-  cloud_init_file = "./modules/tf-yc-instance/configs/users.yaml"
+  cloud_init_file = "configs/users.yaml"
 }
 
 data "yandex_compute_image" "os" {
@@ -40,7 +40,7 @@ resource "yandex_compute_instance" "vm-1" {
   }
 
   metadata = {
-    user-data = "${file(local.cloud_init_file)}"
+    user-data = file("${path.module}/${local.cloud_init_file}")
   }
 
 }
